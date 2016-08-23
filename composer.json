@@ -1,0 +1,10 @@
+{
+	"autoload": {
+        "psr-4": {
+            "Rifeli\\JobQueue\\": "src/",
+        }
+    },
+    "require": {
+        "mariano/disque-php": "^2.0"
+    }
+}
