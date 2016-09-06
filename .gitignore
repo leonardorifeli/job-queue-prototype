@@ -1,5 +1,7 @@
-composer.phar
-.idea
-composer.lock
-vendor/
 .DS_Store
+.idea/
+*.iml
+*.class
+*.jar
+*.war
+**/target/*
