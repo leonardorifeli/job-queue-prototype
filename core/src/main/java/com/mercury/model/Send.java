@@ -3,14 +3,19 @@ package com.mercury.model;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.DefaultConsumer;
+import java.util.concurrent.TimeoutException;
 
 public class Send {
 
     private final static String QUEUE_NAME = "hello";
 
-    public static void main(String[] argv) throws java.io.IOException {
+    public static void main(String[] argv)
+            throws java.io.IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
+
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
