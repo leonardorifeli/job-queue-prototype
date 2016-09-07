@@ -1,4 +1,4 @@
-package com.mercury.api;
+package com.mercury;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;

@@ -15,6 +15,7 @@
         <slf4j-version>1.7.21</slf4j-version>
         <resteasy-version>3.0.18.Final</resteasy-version>
         <junit-version>4.8.2</junit-version>
+        <rabbitmq-version>3.6.5</rabbitmq-version>
     </properties>
 
     <modules>
@@ -43,15 +44,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j-version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j-version}</version>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${rabbitmq-version}</version>
             </dependency>
 
             <dependency>

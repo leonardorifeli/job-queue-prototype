@@ -1,4 +1,4 @@
-package com.mercury.api;
+package com.mercury;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
