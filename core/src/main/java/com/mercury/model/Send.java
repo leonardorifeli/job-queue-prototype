@@ -10,10 +10,12 @@ public class Send {
 
     private final static String QUEUE_NAME = "hermes";
 
-    public static void main(String msg)
-            throws IOException, TimeoutException {
+    public static void main(String msg) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
+        factory.setPort(4369);
+        factory.setUsername("job");
+        factory.setPassword("job");
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();

@@ -10,3 +10,5 @@
 *.jar
 *.war
 **/target/*
+.java-version
+**target**
