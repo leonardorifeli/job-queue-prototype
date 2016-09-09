@@ -1,4 +1,5 @@
 **/bin/**
+**.lst**
 .DS_Store
 **.settings**
 **.classpath**
