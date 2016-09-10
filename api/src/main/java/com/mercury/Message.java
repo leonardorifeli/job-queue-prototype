@@ -20,7 +20,7 @@ public class Message
         Send message = new Send();
 
         try {
-            message.main(msg);
+            message.sendMessage(msg, "mercury");
         } catch (IOException e) {
 
         } catch (TimeoutException e){
