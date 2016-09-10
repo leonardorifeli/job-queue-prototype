@@ -8,19 +8,19 @@ import java.util.concurrent.TimeoutException;
 
 public class Send {
 
-    private final String SERVER = "localhost";
-    private final String USERNAME = "job";
-    private final String PASSWORD = "job";
-    private final Integer PORT = -1;
-    private final ConnectionFactory connectionFactory;
-    private final Connection connection;
-    private final Channel channel;
+    private final static String SERVER = "localhost";
+    private final static String USERNAME = "job";
+    private final static String PASSWORD = "job";
+    private final static Integer PORT = -1;
+    private ConnectionFactory connectionFactory;
+    private Connection connection;
+    private Channel channel;
 
     private ConnectionFactory getConnectionFactory() {
-        if(this.connectionFactory) {
+        if(this.connectionFactory != null) {
             return this.connectionFactory;
         }
-
+        
         this.connectionFactory = new ConnectionFactory();
         this.setConnectionSecurityInformation(this.connectionFactory);
 
@@ -36,30 +36,28 @@ public class Send {
         return factory;
     }
 
-    private Connection getConnection() {
-        if(this.connection) {
+    private Connection getConnection() throws IOException, TimeoutException {
+        if(this.connection != null) {
             return this.connection;
         }   
 
-        Connection this.connection = this.getConnectionFactory().newConnection();
+        this.connection = this.getConnectionFactory().newConnection();
 
         return this.connection;
     }
 
-    private Channel getChannel() {
-        if(this.channel) {
+    private Channel getChannel() throws IOException, TimeoutException {
+        if(this.channel !=  null) {
             return this.channel;
         }
 
-        Channel this.channel = this.getConnection().createChannel();
+        this.channel = this.getConnection().createChannel();
 
         return this.channel;
     }
 
-    private void queueDeclare(String queueName, Channel channel) {
+    private void queueDeclare(String queueName, Channel channel) throws IOException, TimeoutException {
         channel.queueDeclare(queueName, false, false, false, null);
-
-        return channel;
     }
 
     public void sendMessage(String msg, String queueName) throws IOException, TimeoutException {
