@@ -9,8 +9,8 @@ import java.util.concurrent.TimeoutException;
 public class Send {
 
     private final static String SERVER = "localhost";
-    private final static String USERNAME = "job";
-    private final static String PASSWORD = "job";
+    private final static String USERNAME = "guest";
+    private final static String PASSWORD = "guest";
     private final static Integer PORT = -1;
     private ConnectionFactory connectionFactory;
     private Connection connection;
@@ -20,7 +20,7 @@ public class Send {
         if(this.connectionFactory != null) {
             return this.connectionFactory;
         }
-        
+
         this.connectionFactory = new ConnectionFactory();
         this.setConnectionSecurityInformation(this.connectionFactory);
 
