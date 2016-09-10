@@ -39,7 +39,7 @@ public class Send {
     private Connection getConnection() throws IOException, TimeoutException {
         if(this.connection != null) {
             return this.connection;
-        }   
+        }
 
         this.connection = this.getConnectionFactory().newConnection();
 
