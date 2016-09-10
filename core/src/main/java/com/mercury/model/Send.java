@@ -8,27 +8,68 @@ import java.util.concurrent.TimeoutException;
 
 public class Send {
 
-    private final static String QUEUE_NAME = "hermes";
+    private final String SERVER = "localhost";
+    private final String USERNAME = "job";
+    private final String PASSWORD = "job";
+    private final Integer PORT = -1;
+    private final ConnectionFactory connectionFactory;
+    private final Connection connection;
+    private final Channel channel;
 
-    public static void main(String msg) throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        factory.setPort(4369);
-        factory.setUsername("job");
-        factory.setPassword("job");
+    private ConnectionFactory getConnectionFactory() {
+        if(this.connectionFactory) {
+            return this.connectionFactory;
+        }
 
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
+        this.connectionFactory = new ConnectionFactory();
+        this.setConnectionSecurityInformation(this.connectionFactory);
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        return this.connectionFactory;
+    }
 
-        String message = "Hello World, Hermes! "+ msg;
-        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+    private ConnectionFactory setConnectionSecurityInformation(ConnectionFactory factory) {
+        factory.setHost(SERVER);
+        factory.setUsername(USERNAME);
+        factory.setPort(PORT);
+        factory.setPassword(PASSWORD);
 
-        System.out.println(" [x] Sent '" + message + "'");
+        return factory;
+    }
+
+    private Connection getConnection() {
+        if(this.connection) {
+            return this.connection;
+        }   
+
+        Connection this.connection = this.getConnectionFactory().newConnection();
+
+        return this.connection;
+    }
+
+    private Channel getChannel() {
+        if(this.channel) {
+            return this.channel;
+        }
+
+        Channel this.channel = this.getConnection().createChannel();
+
+        return this.channel;
+    }
+
+    private void queueDeclare(String queueName, Channel channel) {
+        channel.queueDeclare(queueName, false, false, false, null);
+
+        return channel;
+    }
+
+    public void sendMessage(String msg, String queueName) throws IOException, TimeoutException {
+        Channel channel = this.getChannel();
+        this.queueDeclare(queueName, channel);
+
+        channel.basicPublish("", queueName, null, msg.getBytes());
 
         channel.close();
-        connection.close();
+        this.getConnection().close();
     }
 
 }
