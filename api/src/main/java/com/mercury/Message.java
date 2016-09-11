@@ -4,12 +4,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.Produces;
 import com.mercury.business.model.Send;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import org.json.simple.JSONObject;
 
 @Path("/message")
+@Produces("application/json")
 public class Message
 {
     private JSONObject result = new JSONObject();
