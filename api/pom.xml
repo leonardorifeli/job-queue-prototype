@@ -13,6 +13,7 @@
         <resteasy-version>3.0.18.Final</resteasy-version>
         <junit-version>4.8.2</junit-version>
         <reflections-version>0.9.10</reflections-version>
+        <json-simple-version>1.1.1</json-simple-version>
     </properties>
 
     <dependencies>
@@ -59,6 +60,13 @@
             <artifactId>resteasy-jackson2-provider</artifactId>
             <version>${resteasy-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>${json-simple-version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
