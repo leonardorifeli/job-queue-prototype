@@ -16,8 +16,8 @@ import org.json.simple.JSONObject;
 @Path("/message")
 @Produces("application/json")
 public class Message {
-    
-    private JSONObject result = new JSONObject();
+
+    private JSONObject result;
     private String queueName = "mercury";
 
     @GET
@@ -28,19 +28,19 @@ public class Message {
 
         try {
             message.sendMessage(msg, this.queueName);
-            this.result = this.getResult(true, msg);
+            return Response.status(200).entity(this.getResult(true, msg)).build();
         } catch (IOException e) {
-            this.result = this.getResult(false, e.getMessage());
-            return Response.status(400).entity(this.result).build();
+            return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
         } catch (TimeoutException e) {
-            this.result = this.getResult(false, e.getMessage());
-            return Response.status(400).entity(this.result).build();
+            return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
         }
 
-        return Response.status(200).entity(this.result).build();
+        return Response.status(400).entity(this.getResult(false, "Error.")).build();
     }
 
     private JSONObject getResult(boolean status, String msg) {
+        this.result = new JSONObject();
+
         this.result.put("isSuccess", status);
         this.result.put("message", msg);
         this.result.put("queueName", this.queueName);
