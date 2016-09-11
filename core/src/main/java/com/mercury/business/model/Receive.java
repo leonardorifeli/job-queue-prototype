@@ -1,4 +1,4 @@
-package com.mercury.model;
+package com.mercury.business.model;
 
 import com.rabbitmq.client.*;
 

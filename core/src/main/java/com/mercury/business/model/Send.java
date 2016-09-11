@@ -1,20 +1,22 @@
-package com.mercury.model;
+package com.mercury.business.model;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import com.mercury.business.enums.RabbitInfoToConfiguration;
 
 public class Send {
 
-    private final static String SERVER = "localhost";
-    private final static String USERNAME = "guest";
-    private final static String PASSWORD = "guest";
-    private final static Integer PORT = -1;
+    private RabbitInfoToConfiguration rabbitConf;
     private ConnectionFactory connectionFactory;
     private Connection connection;
     private Channel channel;
+
+    private RabbitInfoToConfiguration getRabbitConf() {
+        return this.rabbitConf;
+    }
 
     private ConnectionFactory getConnectionFactory() {
         if(this.connectionFactory != null) {
@@ -28,10 +30,10 @@ public class Send {
     }
 
     private ConnectionFactory setConnectionSecurityInformation(ConnectionFactory factory) {
-        factory.setHost(SERVER);
-        factory.setUsername(USERNAME);
-        factory.setPort(PORT);
-        factory.setPassword(PASSWORD);
+        factory.setHost(this.getRabbitConf().getServer());
+        factory.setUsername(this.getRabbitConf().getUsername());
+        factory.setPort(this.getRabbitConf().getPort());
+        factory.setPassword(this.getRabbitConf().getPassword());
 
         return factory;
     }
