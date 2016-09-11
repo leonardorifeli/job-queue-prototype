@@ -1,12 +1,21 @@
 package com.mercury.business.model;
 
-import com.rabbitmq.client.*;
+import com.mercury.business.enums.RabbitInfoToConfiguration;
+
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.Channel;
 
 import java.io.IOException;
 import java.lang.InterruptedException;
 import java.util.concurrent.TimeoutException;
 
 public class Receive {
+
+    private RabbitInfoToConfiguration rabbitConf;
+    private ConnectionFactory connectionFactory;
+    private Connection connection;
+    private Channel channel;
 
     public static void main(String job) throws IOException, InterruptedException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
