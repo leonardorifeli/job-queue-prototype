@@ -1,6 +1,5 @@
 package com.mercury.business.model;
 
-
 import com.mercury.business.enums.RabbitInfoToConfiguration;
 
 import com.rabbitmq.client.ConnectionFactory;
