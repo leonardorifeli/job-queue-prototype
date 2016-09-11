@@ -1,11 +1,14 @@
 package com.mercury.business.model;
 
+
+import com.mercury.business.enums.RabbitInfoToConfiguration;
+
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-import com.mercury.business.enums.RabbitInfoToConfiguration;
 
 public class Send {
 
