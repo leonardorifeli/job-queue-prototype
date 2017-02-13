@@ -17,35 +17,35 @@ import org.json.simple.JSONObject;
 @Produces("application/json")
 public class Message {
 
-    private JSONObject result;
-    private String queueName = "mercury";
+	private JSONObject result;
+	private String queueName = "mercury";
 
-    @GET
-    @Path("/{param}")
-    public Response printMessage(@PathParam("param") String msg)
-    {
-        Send message = new Send();
+	@GET
+	@Path("/{param}")
+	public Response printMessage(@PathParam("param") String msg)
+	{
+		Send message = new Send();
 
-        try {
-            message.sendMessage(msg, this.queueName);
-            return Response.status(200).entity(this.getResult(true, msg)).build();
-        } catch (IOException e) {
-            return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
-        } catch (TimeoutException e) {
-            return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
-        }
+		try {
+			message.sendMessage(msg, this.queueName);
+			return Response.status(200).entity(this.getResult(true, msg)).build();
+		} catch (IOException e) {
+			return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
+		} catch (TimeoutException e) {
+			return Response.status(400).entity(this.getResult(false, e.getMessage())).build();
+		}
 
-        return Response.status(400).entity(this.getResult(false, "Error.")).build();
-    }
+		return Response.status(400).entity(this.getResult(false, "Error.")).build();
+	}
 
-    private JSONObject getResult(boolean status, String msg) {
-        this.result = new JSONObject();
+	private JSONObject getResult(boolean status, String msg) {
+		this.result = new JSONObject();
 
-        this.result.put("isSuccess", status);
-        this.result.put("message", msg);
-        this.result.put("queueName", this.queueName);
+		this.result.put("isSuccess", status);
+		this.result.put("message", msg);
+		this.result.put("queueName", this.queueName);
 
-        return this.result;
-    }
+		return this.result;
+	}
 
 }
