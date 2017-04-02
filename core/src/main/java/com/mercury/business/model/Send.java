@@ -21,10 +21,8 @@ public class Send {
     }
 
     private ConnectionFactory getConnectionFactory() {
-        if(this.connectionFactory != null) {
+        if(this.connectionFactory != null)
             return this.connectionFactory;
-        }
-
         this.connectionFactory = new ConnectionFactory();
         this.setConnectionSecurityInformation(this.connectionFactory);
 
@@ -36,27 +34,21 @@ public class Send {
         factory.setUsername(this.getRabbitConf().getUsername());
         factory.setPort(this.getRabbitConf().getPort());
         factory.setPassword(this.getRabbitConf().getPassword());
-
         return factory;
     }
 
     private Connection getConnection() throws IOException, TimeoutException {
-        if(this.connection != null) {
+        if(this.connection != null)
             return this.connection;
-        }
-
         this.connection = this.getConnectionFactory().newConnection();
 
         return this.connection;
     }
 
     private Channel getChannel() throws IOException, TimeoutException {
-        if(this.channel !=  null) {
+        if(this.channel !=  null)
             return this.channel;
-        }
-
         this.channel = this.getConnection().createChannel();
-
         return this.channel;
     }
 
@@ -67,9 +59,7 @@ public class Send {
     public void sendMessage(String msg, String queueName) throws IOException, TimeoutException {
         Channel channel = this.getChannel();
         this.queueDeclare(queueName, channel);
-
         channel.basicPublish("", queueName, null, msg.getBytes());
-
         channel.close();
         this.getConnection().close();
     }
